@@ -1,0 +1,42 @@
+﻿@model BankForm.Models.ViewModels.QuestionUpsertVM
+
+
+@*@Html.HiddenFor(m => m.FKTemplateId, new{@Value = Model.FKTemplateId} )*@
+
+<form method="post" asp-action="Edit">
+	 <input asp-for="Questions.QuestionTypeString" type="hidden" value="nothingyet">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Question</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<input asp-for="Questions.QuestionId"  type="hidden"   />
+		<input asp-for="Questions.CreatedAt"  type="hidden"   />
+		<input asp-for="Questions.CreatedBy" type="hidden">
+		<input asp-for="Questions.FKSectionId" type="hidden" >
+		<div class="mb-3">
+			<label asp-for="Questions.QuestionName"></label>
+			<input asp-for="Questions.QuestionName" class="form-control" />
+			<span asp-validation-for="Questions.QuestionName" class="text-danger"></span>
+		</div>
+		<div class="formgroup">
+            <label asp-for="Questions.QuestionTypeId"></label>
+            <select asp-for="Questions.QuestionTypeId"  asp-items="@Model.QuestionTypes" class="form-select">
+                <option disabled selected>@Model.Questions.QuestionTypeId</option>
+            </select>
+        </div>
+		
+		<button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+		<a asp-controller="Question" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

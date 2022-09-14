@@ -1,0 +1,44 @@
+﻿@model BankForm.Models.ViewModels.QuestionVM
+
+<a asp-controller="Question" asp-action="Create" asp-route-id="@Model.SectionFkId" class="btn btn-primary btn-lg w-25 float-right mb-3 mr-5 text-dark" style="background-color:#CCD6A6; color:black; font-size:larger; font-weight:700" >
+    Create Question
+</a>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col" class = "col-1 pt-4 text-center">sl no</th>
+      <th scope="col" class = "col-3 text-center">Question</th>
+      <th scope="col" class = "col-3 text-center">Type</th>
+      <th scope="col" class = "col-1 text-center">Display order</th>
+      <th scope="col" class = "col-8 text-center">Settings</th>
+    </tr>
+  </thead>
+  <tbody>
+       @{
+            int i = 1;
+        }
+        @foreach(var obj in Model.QuestionList)
+        {
+            //for retriving the questiontypes for showing in question Index view
+            var temp = Model.QuestionTypeList.FirstOrDefault(u=> u.QuestionTypeId == obj.QuestionTypeId);
+            var QuestionTypeShow = temp.QuestionTypes;
+
+
+            <tr>
+              <td scope="row" class = "col-1 text-center">@(i++)</td>
+              <td class = "col-2 text-center">@obj.QuestionName </td>
+              <td class = "col-2 text-center">@QuestionTypeShow </td> 
+              <td class = "col-1 text-center">@obj.Order</td>  
+              <td class = "col-2 text-center">
+                   <a  class="btn ml-3 btn-primary" asp-controller="Question" asp-action="Edit" asp-route-id="@obj.QuestionId">Edit</a>
+                   <a  class="btn ml-3 btn-danger" asp-controller="Question" asp-action="Delete" asp-route-id="@obj.QuestionId">Delete</a>
+                  @* <a  class="btn ml-3 btn-success" asp-controller="Question" asp-action="Create" asp-route-sectionid="@obj.QuestionId" >Create Questions</a> *@
+              </td>
+        
+            </tr>
+        }
+    
+  </tbody>
+</table>
+

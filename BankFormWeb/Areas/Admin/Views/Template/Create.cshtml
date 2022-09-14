@@ -1,0 +1,30 @@
+﻿@model Template
+
+<form method="post">
+  
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Template</h2>
+            <hr class="row mw-80 ">
+        </div>
+        <div class="formgroup">
+            <label asp-for="TemplateName"></label>
+            <input asp-for="TemplateName" class="form-control">
+            <span asp-validation-for="TemplateName"></span>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+        <button asp-controller="Template" asp-action="Index" class="btn btn-secondary" >Back To List</button>
+    </div>
+  
+</form>
+
+
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

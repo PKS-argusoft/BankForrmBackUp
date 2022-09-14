@@ -1,0 +1,37 @@
+﻿@model BankForm.Models.ViewModels.QuestionUpsertVM
+
+
+<form method="post">
+    <input asp-for="Questions.QuestionTypeString" type="hidden" value="nothingyet">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Question</h2>
+            <hr class="row mw-80 ">
+        </div>
+        <div class="formgroup">
+            <label asp-for="Questions.QuestionName"></label>
+            <input asp-for="Questions.QuestionName" class="form-control">
+            <span asp-validation-for="Questions.QuestionName"></span>
+        </div>
+        <div class="formgroup">
+            <label asp-for="Questions.QuestionTypeId"></label>
+            <select asp-for="Questions.QuestionTypeId"  asp-items="@Model.QuestionTypes" class="form-select">
+                <option disabled selected>--Select QuestionType--</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+        <button asp-area="Admin" asp-controller="Template" asp-action="Index"  class="btn btn-secondary" >Back To List</button>
+    </div>
+  
+</form>
+
+
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
