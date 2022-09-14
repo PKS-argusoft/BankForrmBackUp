@@ -1,0 +1,32 @@
+﻿@model QuestionType
+
+@*@Html.HiddenFor(m => m.TemplateId)*@
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit QuestionType</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<input asp-for="QuestionTypeId"  type="hidden"   />
+		<input asp-for="CreatedAt"  type="hidden"   />
+		<div class="mb-3">
+			<label asp-for="QuestionTypes"></label>
+			<input asp-for="QuestionTypes" class="form-control" />
+			<span asp-validation-for="QuestionTypes" class="text-danger"></span>
+		</div>
+		
+		<button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+		<a asp-controller="QuestionType" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
