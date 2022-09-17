@@ -29,9 +29,9 @@
             <tr>
               <td scope="row" class = "col-1 text-center">@(i++)</td>
               <td class = "col-2 text-center">@obj.QuestionName </td>
-              <td class = "col-2 text-center">@QuestionTypeShow </td> 
+              <td class = "col-2 text-center QuestionTypeShow" >@QuestionTypeShow </td> 
               <td class = "col-2 text-center">
-                    <div class="dropdown show ">
+                    <div class="dropdown show QuestionOptionSet" >
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    --Question Options--
                         </a>
@@ -54,8 +54,26 @@
               </td>
         
             </tr>
+
+
+
         }
     
   </tbody>
 </table>
 
+@section Scripts{
+        <script src="~/js/Question.js"></script>
+}
+@*<script type="text/javascript">
+
+   
+
+    /*
+    foreach(var cont in )
+        var QuestionOptionSetter = document.getElementByClassName('QuestionOptionSet');
+        var QuestionTypeShowSetter = document.getElementByClassName('QuestionTypeShow');
+        console.log(QuestionOptionSetter);*/
+</script>
+
+*@

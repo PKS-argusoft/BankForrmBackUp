@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FpHtOm53CJk9bdtijH62Fqw7w6tK0HSGFBkXKsgu4zg=",
+  "Hash": "gvMsWVjrLpRLKOUJ7nWT4EUxLbOx2wkAk5rKJ+GcWVw=",
   "Source": "BankFormWeb",
   "BasePath": "_content/BankFormWeb",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\js\\Question.js",
+      "SourceId": "BankFormWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\",
+      "BasePath": "_content/BankFormWeb",
+      "RelativePath": "js/Question.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Question.js"
     },
     {
       "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\js\\site.js",
