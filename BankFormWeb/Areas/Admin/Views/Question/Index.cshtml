@@ -8,10 +8,11 @@
   <thead>
     <tr>
       <th scope="col" class = "col-1 pt-4 text-center">sl no</th>
-      <th scope="col" class = "col-3 text-center">Question</th>
-      <th scope="col" class = "col-3 text-center">Type</th>
+      <th scope="col" class = "col-4 text-center">Question</th>
+      <th scope="col" class = "col-2 text-center">Type</th>
+      <th scope="col" class = "col-2 text-center">Options</th>
       <th scope="col" class = "col-1 text-center">Display order</th>
-      <th scope="col" class = "col-8 text-center">Settings</th>
+      <th scope="col" class = "col-1 text-center">Settings</th>
     </tr>
   </thead>
   <tbody>
@@ -23,12 +24,28 @@
             //for retriving the questiontypes for showing in question Index view
             var temp = Model.QuestionTypeList.FirstOrDefault(u=> u.QuestionTypeId == obj.QuestionTypeId);
             var QuestionTypeShow = temp.QuestionTypes;
-
+            var tempQuestionOptions = Model.QuestionOptionList.Where(v => v.FKQuestionId == obj.QuestionId);
 
             <tr>
               <td scope="row" class = "col-1 text-center">@(i++)</td>
               <td class = "col-2 text-center">@obj.QuestionName </td>
               <td class = "col-2 text-center">@QuestionTypeShow </td> 
+              <td class = "col-2 text-center">
+                    <div class="dropdown show ">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   --Question Options--
+                        </a>
+
+                            <div class="dropdown-menu p-2 bg-gradient text-center" aria-labelledby="dropdownMenuLink">
+                            @foreach(var opt in tempQuestionOptions)
+                            {
+                                 <a class="dropdown-item font-weight-bold bg-white text-dark" >@opt.QuestionOptionName</a>
+                            }
+
+                                <a  class="btn btn-primary px-5 mt-3" asp-controller="QuestionOption" asp-action="Index" asp-route-questionid="@obj.QuestionId">Settings</a>
+                        </div>
+                    </div>
+              </td> 
               <td class = "col-1 text-center">@obj.Order</td>  
               <td class = "col-2 text-center">
                    <a  class="btn ml-3 btn-primary" asp-controller="Question" asp-action="Edit" asp-route-id="@obj.QuestionId">Edit</a>

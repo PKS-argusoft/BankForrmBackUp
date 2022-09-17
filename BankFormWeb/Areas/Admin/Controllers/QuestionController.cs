@@ -24,7 +24,8 @@ public class QuestionController : Controller
         {
             SectionFkId = Sectionid,
             QuestionList = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == Sectionid),
-            QuestionTypeList = _unitOfWork.QuestionType.GetAll()
+            QuestionTypeList = _unitOfWork.QuestionType.GetAll(),
+            QuestionOptionList = _unitOfWork.QuestionOption.GetAll()
         };
             
         return View(questionVM);
@@ -62,6 +63,8 @@ public class QuestionController : Controller
     public IActionResult Create(Question Questions)
     {
   
+  
+
         QuestionUpsertVM questionUpsertVM = new()
         {
             Questions = Questions,

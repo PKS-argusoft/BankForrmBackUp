@@ -12,6 +12,7 @@ public interface IUnitOfWork
     ISectionRepository Section { get; }
     IQuestionRepository Question { get; }
     IQuestionTypeRepository QuestionType { get; }
+    IQuestionOptionRepository QuestionOption { get; }
     void Save();
 
 

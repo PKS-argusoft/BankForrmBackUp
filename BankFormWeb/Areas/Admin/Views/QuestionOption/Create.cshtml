@@ -1,0 +1,32 @@
+﻿@model QuestionOption
+
+<form method="post">
+    <input asp-for="FKQuestionId" hidden  />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create QuestionOption</h2>
+            <hr class="row mw-80 ">
+        </div>
+        <div class="formgroup">
+            <label asp-for="QuestionOptionName"></label>
+            <input asp-for="QuestionOptionName" class="form-control">
+            <span asp-validation-for="QuestionOptionName"></span>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+        <a asp-controller="QuestionOption" asp-action="Index" asp-route-questionid="@TempData["storeFKQuestionId"]" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+    </div>
+
+</form>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

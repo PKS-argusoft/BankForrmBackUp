@@ -1,0 +1,32 @@
+﻿@model QuestionOption
+
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit QuestionOption</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<input asp-for="FKQuestionId"  type="hidden"   />
+		<input asp-for="QuestionOptionId"  type="hidden"   />
+		<input asp-for="CreatedAt"  type="hidden"   />
+		<div class="mb-3">
+			<label asp-for="QuestionOptionName"></label>
+			<input asp-for="QuestionOptionName" class="form-control" />
+			<span asp-validation-for="QuestionOptionName" class="text-danger"></span>
+		</div>
+		
+		<button type="submit" class="btn btn-primary" style="width:150px">Save</button>
+		<a asp-controller="QuestionOption" asp-action="Index" asp-route-questionid="@Model.FKQuestionId" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

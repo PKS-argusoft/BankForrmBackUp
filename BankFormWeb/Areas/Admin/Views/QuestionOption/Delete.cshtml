@@ -1,20 +1,20 @@
-﻿@model Question
+﻿@model QuestionOption
 
 <form method="post" asp-action="Delete">
-	<input asp-for="QuestionId" hidden />
+	<input asp-for="QuestionOptionId" hidden />
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary">Delete Question</h2>
+			<h2 class="text-primary">Delete QuestionOption</h2>
 			<hr />
 		</div>
 		@*<div asp-validation-summary="All"></div>*@
 		<div class="mb-3">
-			<label asp-for="QuestionName"></label>
-			<input asp-for="QuestionName" disabled class="form-control" />
+			<label asp-for="QuestionOptionName"></label>
+			<input asp-for="QuestionOptionName" disabled class="form-control" />
 		</div>
 		
 		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
-		<a asp-controller="Question" asp-action="Index" asp-route-sectionid="@Model.FKSectionId" class="btn btn-secondary" style="width:150px">
+		<a asp-controller="QuestionOption" asp-action="Index" asp-route-questionid="@Model.FKQuestionId" class="btn btn-secondary" style="width:150px">
 			Back to List
 		</a>
 	</div>

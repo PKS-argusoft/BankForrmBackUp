@@ -18,11 +18,13 @@ public class UnitOfWork : IUnitOfWork
         Section = new SectionRepository(_db);
         Question = new QuestionRepository(_db);
         QuestionType = new QuestionTypeRepository(_db);
+        QuestionOption = new QuestionOptionRepository(_db);
     }
     public ITemplateRepository Template { get; private set; } 
     public IQuestionTypeRepository QuestionType { get; private set; }
     public IQuestionRepository Question { get; private set; }
     public ISectionRepository Section { get; private set; }
+    public IQuestionOptionRepository QuestionOption { get; private set; }
 
   
 

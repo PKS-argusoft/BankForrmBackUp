@@ -15,4 +15,5 @@ public class ApplicationDbContext:DbContext
     public DbSet<Section> Sections { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<QuestionType> QuestionTypes { get; set; }
+    public DbSet<QuestionOption> QuestionOptions { get; set; }
 }

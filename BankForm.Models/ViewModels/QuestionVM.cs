@@ -13,4 +13,6 @@ public class QuestionVM
 
     public IEnumerable<QuestionType> QuestionTypeList { get; set; }
 
+    public IEnumerable<QuestionOption>  QuestionOptionList { get; set; }
+
 }
