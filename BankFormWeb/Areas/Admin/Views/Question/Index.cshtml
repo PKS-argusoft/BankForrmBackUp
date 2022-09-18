@@ -46,7 +46,12 @@
                         </div>
                     </div>
               </td> 
-              <td class = "col-1 text-center">@obj.Order</td>  
+              <td class = "col-1 text-center my-5">
+
+                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order"><i class="bi bi-caret-up-fill"></i></a>
+                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order"><i class="bi bi-caret-down-fill"></i></a>
+             
+              </td>  
               <td class = "col-2 text-center">
                    <a  class="btn ml-3 btn-primary" asp-controller="Question" asp-action="Edit" asp-route-id="@obj.QuestionId">Edit</a>
                    <a  class="btn ml-3 btn-danger" asp-controller="Question" asp-action="Delete" asp-route-id="@obj.QuestionId">Delete</a>
@@ -65,15 +70,4 @@
 @section Scripts{
         <script src="~/js/Question.js"></script>
 }
-@*<script type="text/javascript">
 
-   
-
-    /*
-    foreach(var cont in )
-        var QuestionOptionSetter = document.getElementByClassName('QuestionOptionSet');
-        var QuestionTypeShowSetter = document.getElementByClassName('QuestionTypeShow');
-        console.log(QuestionOptionSetter);*/
-</script>
-
-*@

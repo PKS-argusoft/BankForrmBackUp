@@ -23,16 +23,36 @@ public class QuestionController : Controller
         QuestionVM questionVM = new()
         {
             SectionFkId = Sectionid,
-            QuestionList = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == Sectionid),
+            QuestionList = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == Sectionid).OrderBy(k=> k.Order),
             QuestionTypeList = _unitOfWork.QuestionType.GetAll(),
             QuestionOptionList = _unitOfWork.QuestionOption.GetAll()
         };
-            
+        
+        
         return View(questionVM);
     }
 
 
+ 
+    public IActionResult upward(int id)
+    {
+        var upwardOperation = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id);
+        var aboveElement = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id - 1);
+        upwardOperation.Order -= 1;
+        aboveElement.Order += 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { sectionid = upwardOperation.FKSectionId });
+    }
 
+    public IActionResult downward(int id)
+    {
+        var downwardOperation = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id);
+        var belowElement = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id + 1);
+        downwardOperation.Order += 1;
+        belowElement.Order -= 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { sectionid = downwardOperation.FKSectionId });
+    }
 
 
 
@@ -81,9 +101,12 @@ public class QuestionController : Controller
             TempData["Error"] = questionUpsertVM.Questions.QuestionName + " already exists .";
             return View(questionUpsertVM);
         }
+        //Get the highest order value and set the current by adding 1 into it
+        var orderSet = _unitOfWork.Question.GetAll().Max(u => u.Order);
+
         if (ModelState.IsValid)
         {
-            
+            Questions.Order = orderSet+1;
             Questions.FKSectionId = Convert.ToInt32(TempData["storeFKSectionId"]);
             _unitOfWork.Question.Add(Questions);
             _unitOfWork.Save();
@@ -202,6 +225,15 @@ public class QuestionController : Controller
         }
 
         _unitOfWork.Question.Remove(obj);
+
+        _unitOfWork.Save();
+        var reorderList = _unitOfWork.Question.GetAll();
+        var i = 1;
+        foreach(var inObj in reorderList)
+        {
+            inObj.Order = i;
+            i++;
+        }
         _unitOfWork.Save();
         TempData["success"] = "Question deleted successfully";
         return RedirectToAction("Index", new { sectionid = tempfkstore });
