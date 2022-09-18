@@ -18,12 +18,34 @@ public class QuestionOptionController : Controller
     {
         QuestionOptionVM questionOptionVM = new()
         {
-            QuestionOptionList = _unitOfWork.QuestionOption.GetAll().Where(u => u.FKQuestionId == QuestionId),
+            QuestionOptionList = _unitOfWork.QuestionOption.GetAll().Where(u => u.FKQuestionId == QuestionId).OrderBy(k => k.Order),
             QuestionFkId = QuestionId 
         };
        
         return View(questionOptionVM);
     }
+
+
+    public IActionResult upward(int id)
+    {
+        var upwardOperation = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id);
+        var aboveElement = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id - 1);
+        upwardOperation.Order -= 1;
+        aboveElement.Order += 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { questionid = upwardOperation.FKQuestionId });
+    }
+
+    public IActionResult downward(int id)
+    {
+        var downwardOperation = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id);
+        var belowElement = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id + 1);
+        downwardOperation.Order += 1;
+        belowElement.Order -= 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { questionid = downwardOperation.FKQuestionId });
+    }
+
 
     //GET
     public IActionResult Create(int id)
@@ -39,8 +61,11 @@ public class QuestionOptionController : Controller
     [ValidateAntiforgeryToken]
     public IActionResult Create(QuestionOption obj)
     {
-        if(ModelState.IsValid)
+        //Get the highest order value and set the current by adding 1 into it
+        var orderSet = _unitOfWork.QuestionOption.GetAll().Max(u => u.Order);
+        if (ModelState.IsValid)
         {
+            obj.Order = orderSet+1;
             /*obj.FKQuestionId = Convert.ToInt32(TempData["storeFKQuestionId"]);*/
             _unitOfWork.QuestionOption.Add(obj);
             _unitOfWork.Save();
@@ -116,6 +141,15 @@ public class QuestionOptionController : Controller
         }
 
         _unitOfWork.QuestionOption.Remove(obj);
+        _unitOfWork.Save();
+
+        var reorderList = _unitOfWork.QuestionOption.GetAll().OrderBy(u => u.Order);
+        var i = 1;
+        foreach (var inObj in reorderList)
+        {
+            inObj.Order = i;
+            i++;
+        }
         _unitOfWork.Save();
         TempData["success"] = "QuestionOption deleted successfully";
         return RedirectToAction("Index", new { questionid = tempfkstore });

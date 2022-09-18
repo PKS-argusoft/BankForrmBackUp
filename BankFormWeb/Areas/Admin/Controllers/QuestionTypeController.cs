@@ -16,10 +16,33 @@ public class QuestionTypeController : Controller
     public IActionResult Index()
     {
      
-        IEnumerable<QuestionType> objQuestionTypeList = _unitOfWork.QuestionType.GetAll();
+        IEnumerable<QuestionType> objQuestionTypeList = _unitOfWork.QuestionType.GetAll().OrderBy(k => k.Order);
     
         return View(objQuestionTypeList);
     }
+
+
+    public IActionResult upward(int id)
+    {
+        var upwardOperation = _unitOfWork.QuestionType.GetFirstOrDefault(u => u.Order == id);
+        var aboveElement = _unitOfWork.QuestionType.GetFirstOrDefault(u => u.Order == id - 1);
+        upwardOperation.Order -= 1;
+        aboveElement.Order += 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult downward(int id)
+    {
+        var downwardOperation = _unitOfWork.QuestionType.GetFirstOrDefault(u => u.Order == id);
+        var belowElement = _unitOfWork.QuestionType.GetFirstOrDefault(u => u.Order == id + 1);
+        downwardOperation.Order += 1;
+        belowElement.Order -= 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index");
+    }
+
+
 
     //GET
     public IActionResult Create()
@@ -35,9 +58,10 @@ public class QuestionTypeController : Controller
         var QuestionTypesFromDbnCheck = _unitOfWork.QuestionType.GetFirstOrDefault(x => x.QuestionTypes == obj.QuestionTypes);
         if (QuestionTypesFromDbnCheck == null)
         {
-
+            var orderSet = _unitOfWork.QuestionType.GetAll().Max(u => u.Order);
             if (ModelState.IsValid)
             {
+                obj.Order = orderSet+1;
                 obj.CreatedAt = DateTime.Now;
                 _unitOfWork.QuestionType.Add(obj);
                 _unitOfWork.Save();
@@ -120,6 +144,15 @@ public class QuestionTypeController : Controller
 
         _unitOfWork.QuestionType.Remove(obj);
         _unitOfWork.Save();
+        var reorderList = _unitOfWork.QuestionType.GetAll().OrderBy(u=> u.Order);
+        var i = 1;
+        foreach (var inObj in reorderList)
+        {
+            inObj.Order = i;
+            i++;
+        }
+        _unitOfWork.Save();
+
         TempData["success"] = "QuestionType deleted successfully";
         return RedirectToAction("Index");
 

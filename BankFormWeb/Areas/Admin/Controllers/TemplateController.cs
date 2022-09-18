@@ -2,6 +2,7 @@
 using BankForm.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using BankForm.DataAccess.Repository.IRepository;
+using BankForm.Models.ViewModels;
 
 namespace BankFormWeb.Areas.Admin.Controllers;
 [Area("Admin")]
@@ -16,10 +17,36 @@ public class TemplateController : Controller
 
     public IActionResult Index()
     {
-        IEnumerable<Template> objTemplateList = _unitOfWork.Template.GetAll();
+        IEnumerable<Template> objTemplateList = _unitOfWork.Template.GetAll().OrderBy(k => k.Order);
 
         return View(objTemplateList);
     }
+
+
+    public IActionResult upward(int id)
+    {
+        var upwardOperation = _unitOfWork.Template.GetFirstOrDefault(u => u.Order == id);
+        var aboveElement = _unitOfWork.Template.GetFirstOrDefault(u => u.Order == id - 1);
+        upwardOperation.Order -= 1;
+        aboveElement.Order += 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult downward(int id)
+    {
+        var downwardOperation = _unitOfWork.Template.GetFirstOrDefault(u => u.Order == id);
+        var belowElement = _unitOfWork.Template.GetFirstOrDefault(u => u.Order == id + 1);
+        downwardOperation.Order += 1;
+        belowElement.Order -= 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index");
+    }
+
+
+
+
+
 
     //GET
     public IActionResult Create()
@@ -35,9 +62,11 @@ public class TemplateController : Controller
         var templateFromDbnCheck = _unitOfWork.Template.GetFirstOrDefault(x => x.TemplateName == obj.TemplateName);
         if (templateFromDbnCheck == null)
         {
+            var orderSet = _unitOfWork.Template.GetAll().Max(u => u.Order);
 
             if (ModelState.IsValid)
             {
+                obj.Order = orderSet + 1;
                 obj.CreatedAt = DateTime.Now;
                 _unitOfWork.Template.Add(obj);
                 _unitOfWork.Save();
@@ -120,6 +149,15 @@ public class TemplateController : Controller
 
         _unitOfWork.Template.Remove(obj);
         _unitOfWork.Save();
+        var reorderList = _unitOfWork.Template.GetAll().OrderBy(u => u.Order);
+        var i = 1;
+        foreach (var inObj in reorderList)
+        {
+            inObj.Order = i;
+            i++;
+        }
+        _unitOfWork.Save();
+
         TempData["success"] = "Template deleted successfully";
         return RedirectToAction("Index");
 

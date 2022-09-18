@@ -23,11 +23,38 @@ public class SectionController : Controller
         SectionVM sectionVM = new()
         {
             TemplateId = Templateid,
-            SectionList = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId == Templateid)
+            SectionList = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId == Templateid).OrderBy(u=> u.Order)
         };
 
         return View(sectionVM);
     }
+
+
+
+    public IActionResult upward(int id)
+    {
+        var upwardOperation = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id);
+        var aboveElement = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id - 1);
+        upwardOperation.Order -= 1;
+        aboveElement.Order += 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { templateid = upwardOperation.FKTemplateId });
+    }
+
+    public IActionResult downward(int id)
+    {
+        var downwardOperation = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id);
+        var belowElement = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id + 1);
+        downwardOperation.Order += 1;
+        belowElement.Order -= 1;
+        _unitOfWork.Save();
+        return RedirectToAction("Index", new { templateid = downwardOperation.FKTemplateId });
+    }
+
+
+
+
+
 
     //GET
     public IActionResult Create(int id)
@@ -48,8 +75,10 @@ public class SectionController : Controller
             TempData["Error"] = obj.SectionName + " already exists .";
             return View(obj);
         }
+        var orderSet = _unitOfWork.Question.GetAll().Max(u => u.Order);
         if (ModelState.IsValid)
         {
+            obj.Order= orderSet+1;
             obj.FKTemplateId = Convert.ToInt32(TempData["storeFKTemplate"]);
             _unitOfWork.Section.Add(obj);
             _unitOfWork.Save();
@@ -59,6 +88,12 @@ public class SectionController : Controller
 
         return View(obj);
     }
+
+
+
+
+
+
 
 
     //GET
@@ -127,6 +162,14 @@ public class SectionController : Controller
         }
 
         _unitOfWork.Section.Remove(obj);
+        _unitOfWork.Save();
+        var reorderList = _unitOfWork.Section.GetAll().OrderBy(u => u.Order);
+        var i = 1;
+        foreach (var inObj in reorderList)
+        {
+            inObj.Order = i;
+            i++;
+        }
         _unitOfWork.Save();
         TempData["success"] = "Section deleted successfully";
         return RedirectToAction("Index", new { templateid = tempfkstore });

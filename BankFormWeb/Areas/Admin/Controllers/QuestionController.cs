@@ -227,7 +227,7 @@ public class QuestionController : Controller
         _unitOfWork.Question.Remove(obj);
 
         _unitOfWork.Save();
-        var reorderList = _unitOfWork.Question.GetAll();
+        var reorderList = _unitOfWork.Question.GetAll().OrderBy(u => u.Order);
         var i = 1;
         foreach(var inObj in reorderList)
         {

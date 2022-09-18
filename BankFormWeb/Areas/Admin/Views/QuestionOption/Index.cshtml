@@ -23,7 +23,12 @@
                   <tr>
                         <td class="col-1 text-center" scope="row">@(i++)</td>
                         <td class="col-4 text-center"  >@obj.QuestionOptionName</td>
-                        <td class="col-2 text-center"  >@obj.Order</td>
+                        <td class="col-2 text-center"  >     
+
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order"><i class="bi bi-caret-up-fill"></i></a>
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order"><i class="bi bi-caret-down-fill"></i></a>
+
+                        </td>
                         <td class=" text-center"  >
                             <a  class="btn ml-3 btn-primary" asp-controller="QuestionOption" asp-action="Edit" asp-route-id="@obj.QuestionOptionId">Edit</a>
                             <a  class="btn ml-3 btn-danger" asp-controller="QuestionOption" asp-action="Delete" asp-route-id="@obj.QuestionOptionId">Delete</a>
