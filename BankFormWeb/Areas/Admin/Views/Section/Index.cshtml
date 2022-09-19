@@ -16,8 +16,15 @@
     </tr>
   </thead>
   <tbody>
-       @{
-            int i = 1;
+        @{
+            int i=0, nd=0, nu=0;
+            if(Model.SectionList.Count() != 0)
+            {
+                
+                 i = 1;
+                 nd = Model.SectionList.Min(u => u.Order);
+                 nu = Model.SectionList.Max(u => u.Order);
+            }
         }
         @foreach(var obj in Model.SectionList)
         {
@@ -25,9 +32,14 @@
                 <td scope="row" class = "col-2 text-center">@(i++)</td>
               <td class = "col-2 text-center">@obj.SectionName </td>
               <td class = "col-3 text-center">
-
-                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order"><i class="bi bi-caret-up-fill"></i></a>
-                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order"><i class="bi bi-caret-down-fill"></i></a>
+                    @if (obj.Order != nd)
+                    {
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order" asp-route-fk="@obj.FKTemplateId"><i class="bi bi-caret-up-fill"></i></a>
+                    }
+                    @if (obj.Order != nu)
+                    {
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order" asp-route-fk="@obj.FKTemplateId"><i class="bi bi-caret-down-fill"></i></a>
+                    }
 
               </td>  
               <td class = "col-2 text-center">
@@ -38,6 +50,7 @@
         
             </tr>
         }
+         
     
   </tbody>
 </table>

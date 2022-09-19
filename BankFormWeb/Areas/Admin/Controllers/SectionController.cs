@@ -31,20 +31,22 @@ public class SectionController : Controller
 
 
 
-    public IActionResult upward(int id)
+    public IActionResult upward(int id , int fk)
     {
-        var upwardOperation = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id);
-        var aboveElement = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id - 1);
+        var selectedOnes = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId == fk);
+        var upwardOperation = selectedOnes.FirstOrDefault(u=> u.Order == id);
+        var aboveElement = selectedOnes.FirstOrDefault(u => u.Order == id - 1);
         upwardOperation.Order -= 1;
         aboveElement.Order += 1;
         _unitOfWork.Save();
         return RedirectToAction("Index", new { templateid = upwardOperation.FKTemplateId });
     }
 
-    public IActionResult downward(int id)
+    public IActionResult downward(int id, int fk)
     {
-        var downwardOperation = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id);
-        var belowElement = _unitOfWork.Section.GetFirstOrDefault(u => u.Order == id + 1);
+        var selectedOnes = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId == fk);
+        var downwardOperation = selectedOnes.FirstOrDefault(u => u.Order == id);
+        var belowElement = selectedOnes.FirstOrDefault(u => u.Order == id +1 );
         downwardOperation.Order += 1;
         belowElement.Order -= 1;
         _unitOfWork.Save();
@@ -59,8 +61,10 @@ public class SectionController : Controller
     //GET
     public IActionResult Create(int id)
     {
+        Section section = new Section();
+        section.FKTemplateId = id;
         TempData["storeFKTemplate"] = id;
-        return View();
+        return View(section);
     }
 
     //POST
@@ -75,11 +79,16 @@ public class SectionController : Controller
             TempData["Error"] = obj.SectionName + " already exists .";
             return View(obj);
         }
-        var orderSet = _unitOfWork.Question.GetAll().Max(u => u.Order);
         if (ModelState.IsValid)
         {
-            obj.Order= orderSet+1;
             obj.FKTemplateId = Convert.ToInt32(TempData["storeFKTemplate"]);
+            var selectedOnes = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId ==  obj.FKTemplateId);
+            var orderSet = 0;
+            if(selectedOnes.Count() != 0)
+            {
+                orderSet = selectedOnes.Max(u => u.Order);
+            }
+            obj.Order= orderSet+1;
             _unitOfWork.Section.Add(obj);
             _unitOfWork.Save();
             TempData["Success"] = obj.SectionName + " is added successfully .";
@@ -163,7 +172,7 @@ public class SectionController : Controller
 
         _unitOfWork.Section.Remove(obj);
         _unitOfWork.Save();
-        var reorderList = _unitOfWork.Section.GetAll().OrderBy(u => u.Order);
+        var reorderList = _unitOfWork.Section.GetAll().Where(u=> u.FKTemplateId == tempfkstore).OrderBy(u => u.Order);
         var i = 1;
         foreach (var inObj in reorderList)
         {

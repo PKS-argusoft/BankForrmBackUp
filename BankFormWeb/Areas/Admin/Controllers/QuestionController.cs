@@ -33,27 +33,28 @@ public class QuestionController : Controller
     }
 
 
- 
-    public IActionResult upward(int id)
+
+    public IActionResult upward(int id, int fk)
     {
-        var upwardOperation = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id);
-        var aboveElement = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id - 1);
+        var selectedOnes = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == fk);
+        var upwardOperation = selectedOnes.FirstOrDefault(u => u.Order == id);
+        var aboveElement = selectedOnes.FirstOrDefault(u => u.Order == id - 1);
         upwardOperation.Order -= 1;
         aboveElement.Order += 1;
         _unitOfWork.Save();
         return RedirectToAction("Index", new { sectionid = upwardOperation.FKSectionId });
     }
 
-    public IActionResult downward(int id)
+    public IActionResult downward(int id, int fk)
     {
-        var downwardOperation = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id);
-        var belowElement = _unitOfWork.Question.GetFirstOrDefault(u => u.Order == id + 1);
+        var selectedOnes = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == fk);
+        var downwardOperation = selectedOnes.FirstOrDefault(u => u.Order == id);
+        var belowElement = selectedOnes.FirstOrDefault(u => u.Order == id + 1);
         downwardOperation.Order += 1;
         belowElement.Order -= 1;
         _unitOfWork.Save();
         return RedirectToAction("Index", new { sectionid = downwardOperation.FKSectionId });
     }
-
 
 
 
@@ -102,12 +103,18 @@ public class QuestionController : Controller
             return View(questionUpsertVM);
         }
         //Get the highest order value and set the current by adding 1 into it
-        var orderSet = _unitOfWork.Question.GetAll().Max(u => u.Order);
+        
 
         if (ModelState.IsValid)
         {
-            Questions.Order = orderSet+1;
             Questions.FKSectionId = Convert.ToInt32(TempData["storeFKSectionId"]);
+            var selectedOnes = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == Questions.FKSectionId);
+            var orderSet = 0;
+            if (selectedOnes.Count() != 0)
+            {
+                orderSet = selectedOnes.Max(u => u.Order);
+            }
+            Questions.Order = orderSet+1;
             _unitOfWork.Question.Add(Questions);
             _unitOfWork.Save();
             TempData["Success"] = Questions.QuestionName + " is added successfully .";
@@ -227,7 +234,7 @@ public class QuestionController : Controller
         _unitOfWork.Question.Remove(obj);
 
         _unitOfWork.Save();
-        var reorderList = _unitOfWork.Question.GetAll().OrderBy(u => u.Order);
+        var reorderList = _unitOfWork.Question.GetAll().Where(u => u.FKSectionId == tempfkstore).OrderBy(u => u.Order);
         var i = 1;
         foreach(var inObj in reorderList)
         {

@@ -75,6 +75,8 @@ public class TemplateController : Controller
             }
 
         }
+        else 
+            TempData["Error"] = obj.TemplateName + "  already exists .";
         return View(obj);
     }
 
@@ -150,14 +152,16 @@ public class TemplateController : Controller
         _unitOfWork.Template.Remove(obj);
         _unitOfWork.Save();
         var reorderList = _unitOfWork.Template.GetAll().OrderBy(u => u.Order);
-        var i = 1;
-        foreach (var inObj in reorderList)
+        if (reorderList.Count() != 0)
         {
-            inObj.Order = i;
-            i++;
+            var i = 1;
+            foreach (var inObj in reorderList)
+            {
+                inObj.Order = i;
+                i++;
+            }
+            _unitOfWork.Save();
         }
-        _unitOfWork.Save();
-
         TempData["success"] = "Template deleted successfully";
         return RedirectToAction("Index");
 

@@ -26,25 +26,28 @@ public class QuestionOptionController : Controller
     }
 
 
-    public IActionResult upward(int id)
+    public IActionResult upward(int id, int fk)
     {
-        var upwardOperation = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id);
-        var aboveElement = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id - 1);
+        var selectedOnes = _unitOfWork.QuestionOption.GetAll().Where(u => u.FKQuestionId == fk);
+        var upwardOperation = selectedOnes.FirstOrDefault(u => u.Order == id);
+        var aboveElement = selectedOnes.FirstOrDefault(u => u.Order == id - 1);
         upwardOperation.Order -= 1;
         aboveElement.Order += 1;
         _unitOfWork.Save();
         return RedirectToAction("Index", new { questionid = upwardOperation.FKQuestionId });
     }
 
-    public IActionResult downward(int id)
+    public IActionResult downward(int id, int fk)
     {
-        var downwardOperation = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id);
-        var belowElement = _unitOfWork.QuestionOption.GetFirstOrDefault(u => u.Order == id + 1);
+        var selectedOnes = _unitOfWork.QuestionOption.GetAll().Where(u => u.FKQuestionId == fk);
+        var downwardOperation = selectedOnes.FirstOrDefault(u => u.Order == id);
+        var belowElement = selectedOnes.FirstOrDefault(u => u.Order == id + 1);
         downwardOperation.Order += 1;
         belowElement.Order -= 1;
         _unitOfWork.Save();
         return RedirectToAction("Index", new { questionid = downwardOperation.FKQuestionId });
     }
+
 
 
     //GET
@@ -62,9 +65,14 @@ public class QuestionOptionController : Controller
     public IActionResult Create(QuestionOption obj)
     {
         //Get the highest order value and set the current by adding 1 into it
-        var orderSet = _unitOfWork.QuestionOption.GetAll().Max(u => u.Order);
         if (ModelState.IsValid)
         {
+            var selectedOnes = _unitOfWork.QuestionOption.GetAll().Where(U=>U.FKQuestionId == obj.FKQuestionId);
+            var orderSet = 0;
+            if (selectedOnes.Count() != 0)
+            {
+                orderSet = selectedOnes.Max(u => u.Order);
+            }
             obj.Order = orderSet+1;
             /*obj.FKQuestionId = Convert.ToInt32(TempData["storeFKQuestionId"]);*/
             _unitOfWork.QuestionOption.Add(obj);
@@ -143,7 +151,7 @@ public class QuestionOptionController : Controller
         _unitOfWork.QuestionOption.Remove(obj);
         _unitOfWork.Save();
 
-        var reorderList = _unitOfWork.QuestionOption.GetAll().OrderBy(u => u.Order);
+        var reorderList = _unitOfWork.QuestionOption.GetAll().Where(u=>u.FKQuestionId == tempfkstore).OrderBy(u => u.Order);
         var i = 1;
         foreach (var inObj in reorderList)
         {
@@ -159,3 +167,4 @@ public class QuestionOptionController : Controller
 
 
 }
+

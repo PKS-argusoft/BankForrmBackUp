@@ -15,17 +15,32 @@
     </tr>
   </thead>
   <tbody>
-       @{
-            int i = 1;
+        @{
+            int i = 0, nd = 0, nu = 0;
+            if (Model.Count() != 0)
+            {
+
+                i = 1;
+                nd = Model.Min(u => u.Order);
+                nu = Model.Max(u => u.Order);
+            }
         }
+        
         @foreach(var obj in Model)
         {
             <tr>
                 <td scope="row" class = "col-2 text-center">@(i++)</td>
               <td class = "col-2 text-center">@obj.TemplateName </td>
+
               <td class = "col-3 text-center">       
+                  @if(obj.Order != nd)
+                  {
                     <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order"><i class="bi bi-caret-up-fill"></i></a>
+                  }
+                  @if(obj.Order != nu)
+                  {
                     <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order"><i class="bi bi-caret-down-fill"></i></a>  
+                  }
               </td>  
               <td class = "col-2 text-center">
                    <a  class="btn ml-3 btn-primary" asp-controller="Template" asp-action="Edit" asp-route-id="@obj.TemplateId">Edit</a>

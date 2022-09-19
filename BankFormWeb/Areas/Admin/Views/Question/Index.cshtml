@@ -16,8 +16,15 @@
     </tr>
   </thead>
   <tbody>
-       @{
-            int i = 1;
+        @{
+            int i = 0, nd = 0, nu = 0;
+            if (Model.QuestionList.Count() != 0)
+            {
+
+                i = 1;
+                nd = Model.QuestionList.Min(u => u.Order);
+                nu = Model.QuestionList.Max(u => u.Order);
+            }
         }
         @foreach(var obj in Model.QuestionList)
         {
@@ -47,10 +54,14 @@
                     </div>
               </td> 
               <td class = "col-1 text-center my-5">
-
-                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order"><i class="bi bi-caret-up-fill"></i></a>
-                    <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order"><i class="bi bi-caret-down-fill"></i></a>
-             
+                    @if (obj.Order != nd)
+                    {
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:green;" asp-action="upward" asp-route-id="@obj.Order" asp-route-fk="@obj.FKSectionId"><i class="bi bi-caret-up-fill"></i></a>
+                    }
+                    @if (obj.Order != nu)
+                    {
+                            <a class="bg-transparent border-0 " style="font-size:1.5rem; color:red;" asp-action="downward" asp-route-id="@obj.Order" asp-route-fk="@obj.FKSectionId"><i class="bi bi-caret-down-fill"></i></a>
+                    }
               </td>  
               <td class = "col-2 text-center">
                    <a  class="btn ml-3 btn-primary" asp-controller="Question" asp-action="Edit" asp-route-id="@obj.QuestionId">Edit</a>
