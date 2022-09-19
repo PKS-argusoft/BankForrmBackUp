@@ -17,9 +17,7 @@ public class TemplateController : Controller
 
     public IActionResult Index()
     {
-        IEnumerable<Template> objTemplateList = _unitOfWork.Template.GetAll().OrderBy(k => k.Order);
-
-        return View(objTemplateList);
+        return View();
     }
 
 
@@ -167,6 +165,15 @@ public class TemplateController : Controller
 
     }
 
+    #region API CALLS
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var templateList = _unitOfWork.Template.GetAll();
+        return Json( new { data =  templateList });
+    }
+
+    #endregion
 
 
 }

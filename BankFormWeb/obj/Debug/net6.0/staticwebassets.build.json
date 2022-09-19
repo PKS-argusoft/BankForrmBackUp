@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gvMsWVjrLpRLKOUJ7nWT4EUxLbOx2wkAk5rKJ+GcWVw=",
+  "Hash": "cPTmciLqPyVpknkwrPePpPnwmF3hjk00SOnljtReoEs=",
   "Source": "BankFormWeb",
   "BasePath": "_content/BankFormWeb",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\js\\Template.js",
+      "SourceId": "BankFormWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\",
+      "BasePath": "_content/BankFormWeb",
+      "RelativePath": "js/Template.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Template.js"
     },
     {
       "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
