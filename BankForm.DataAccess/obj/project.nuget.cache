@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mJTrIzUHUGRP6Ky1IpmGRdn1XhfGTrezzUZPX3COXa1ryqNIeRyA3b3/+KE9IRPJq1lNkL79+gcyJvCVxAXBCw==",
+  "dgSpecHash": "7P9xSh8xb6/LaSrc0bisSC0boTZn4zjElybR1HqDSvjQ4XiuIg6Xs8xmBR1kpaQ2VktTLRkmtmKxAmQOa29phg==",
   "success": true,
   "projectFilePath": "E:\\argu\\c#\\BankForm\\BankForm.DataAccess\\BankForm.DataAccess.csproj",
   "expectedPackageFiles": [

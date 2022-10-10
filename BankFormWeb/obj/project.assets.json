@@ -3738,6 +3738,9 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.9",
           "Microsoft.AspNetCore.Identity.UI": "6.0.9",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.9",
+          "Microsoft.EntityFrameworkCore": "6.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.9",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
           "linq2db": "4.2.0"
         },
@@ -3746,6 +3749,26 @@
         },
         "runtime": {
           "bin/placeholder/BankForm.Models.dll": {}
+        }
+      },
+      "BankForm.Utility/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.9",
+          "Microsoft.AspNetCore.Identity.UI": "6.0.9",
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.9",
+          "Microsoft.EntityFrameworkCore": "6.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.9",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
+          "linq2db": "4.2.0"
+        },
+        "compile": {
+          "bin/placeholder/BankForm.Utility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankForm.Utility.dll": {}
         }
       }
     }
@@ -10540,11 +10563,17 @@
       "type": "project",
       "path": "../BankForm.Models/BankForm.Models.csproj",
       "msbuildProject": "../BankForm.Models/BankForm.Models.csproj"
+    },
+    "BankForm.Utility/1.0.0": {
+      "type": "project",
+      "path": "../BankForm.Utility/BankForm.Utility.csproj",
+      "msbuildProject": "../BankForm.Utility/BankForm.Utility.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "BankForm.DataAccess >= 1.0.0",
+      "BankForm.Utility >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.9",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.9",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 6.0.9",
@@ -10590,6 +10619,9 @@
           "projectReferences": {
             "E:\\argu\\c#\\BankForm\\BankForm.DataAccess\\BankForm.DataAccess.csproj": {
               "projectPath": "E:\\argu\\c#\\BankForm\\BankForm.DataAccess\\BankForm.DataAccess.csproj"
+            },
+            "E:\\argu\\c#\\BankForm\\BankForm.Utility\\BankForm.Utility.csproj": {
+              "projectPath": "E:\\argu\\c#\\BankForm\\BankForm.Utility\\BankForm.Utility.csproj"
             }
           }
         }

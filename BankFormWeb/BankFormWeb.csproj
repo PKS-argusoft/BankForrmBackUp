@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Data\**" />
+    <Content Remove="Areas\Identity\Data\**" />
+    <EmbeddedResource Remove="Areas\Identity\Data\**" />
+    <None Remove="Areas\Identity\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Areas\Admin\Controllers\QuestionOptionVM.cs" />
   </ItemGroup>
 
@@ -27,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankForm.DataAccess\BankForm.DataAccess.csproj" />
+    <ProjectReference Include="..\BankForm.Utility\BankForm.Utility.csproj" />
   </ItemGroup>
 
 </Project>

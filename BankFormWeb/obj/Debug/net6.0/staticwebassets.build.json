@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "786EWjOqaXTK1BaGJ8OCQOSrphJGdS5wVB0fgzeRosk=",
+  "Hash": "6mvQZ1ANfofBP3WhlADn0wJuXc8Ybf6nMsUHiWNzop4=",
   "Source": "BankFormWeb",
   "BasePath": "_content/BankFormWeb",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\css\\StartPageVM.css",
+      "SourceId": "BankFormWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\",
+      "BasePath": "_content/BankFormWeb",
+      "RelativePath": "css/StartPageVM.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StartPageVM.css"
     },
     {
       "Identity": "E:\\argu\\c#\\BankForm\\BankFormWeb\\wwwroot\\favicon.ico",

@@ -103,12 +103,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/argu/c\#/BankForm/BankFormWeb/Areas/Customer/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [E:/argu/c\#/BankForm/BankFormWeb/Areas/Customer/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/argu/c\#/BankForm/BankFormWeb/Areas/Customer/Views/Home/_Sidebar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcSG9tZVxfU2lkZWJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/argu/c\#/BankForm/BankFormWeb/Areas/Customer/Views/_ViewImports.cshtml]
@@ -302,6 +302,10 @@ build_metadata.AdditionalFiles.CssScope =
 [E:/argu/c\#/BankForm/BankFormWeb/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[E:/argu/c\#/BankForm/BankFormWeb/Areas/Customer/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-t8fk76k3jm
 
 [E:/argu/c\#/BankForm/BankFormWeb/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s

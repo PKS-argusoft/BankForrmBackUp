@@ -3717,6 +3717,9 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.9",
           "Microsoft.AspNetCore.Identity.UI": "6.0.9",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.9",
+          "Microsoft.EntityFrameworkCore": "6.0.9",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.9",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10",
           "linq2db": "4.2.0"
         },

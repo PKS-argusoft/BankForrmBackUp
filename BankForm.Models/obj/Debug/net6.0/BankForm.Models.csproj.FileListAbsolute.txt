@@ -600,3 +600,5 @@ E:\argu\c#\BankForm\BankForm.Models\obj\Debug\net6.0\BankForm.Models.dll
 E:\argu\c#\BankForm\BankForm.Models\obj\Debug\net6.0\refint\BankForm.Models.dll
 E:\argu\c#\BankForm\BankForm.Models\obj\Debug\net6.0\BankForm.Models.pdb
 E:\argu\c#\BankForm\BankForm.Models\obj\Debug\net6.0\ref\BankForm.Models.dll
+E:\argu\c#\BankForm\BankForm.Models\bin\Debug\net6.0\BankForm.Models.runtimeconfig.json
+E:\argu\c#\BankForm\BankForm.Models\obj\Debug\net6.0\BankForm.Models.genruntimeconfig.cache

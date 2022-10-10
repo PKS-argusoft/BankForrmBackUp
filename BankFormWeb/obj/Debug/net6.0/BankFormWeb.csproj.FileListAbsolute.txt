@@ -1123,3 +1123,6 @@ E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.Build.Framework.dll
 E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.NET.StringTools.dll
 E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Utility.dll
+E:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Utility.pdb
+E:\argu\c#\BankForm\BankFormWeb\obj\Debug\net6.0\scopedcss\Areas\Customer\Views\Home\Index.cshtml.rz.scp.css
