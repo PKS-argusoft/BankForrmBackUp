@@ -1,4 +1,7 @@
-﻿<style>
+﻿@using System.Data.Linq
+
+
+<style>
     body {
     position: relative;
     overflow-x: hidden;
@@ -347,6 +350,7 @@ a[href*="#followme"]::before {
 
 </style>
 
+
 @model BankForm.Models.ViewModels.StartPageVM;
 <div id="control-view">
     <div id="wrapper">
@@ -396,15 +400,23 @@ a[href*="#followme"]::before {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        <h1>Fancy Toggle Sidebar Navigation</h1>
-                        <ul>
-                            @foreach(var obj in Model.questions)
+                            <h1>@Model.sectionName</h1>
+                        <form>
+                            @foreach (var obj in Model.questions)
                             {
-                                <li>
-                                    <a>@obj.QuestionName </a>
-                                </li>
+                                <p>
+                                  <label>@obj.QuestionName : <br> <input type="text" style="width:100%;" /></label>
+                                </p>
+                                    
                             }
-                        </ul>
+
+                            <p>
+                               <button type="submit">Submit</button>
+                            </p>
+
+
+                        </form>   
+                        
                         
                         
                         

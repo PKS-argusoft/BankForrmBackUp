@@ -31,6 +31,7 @@ public class HomeController : Controller
         {
             templates = _unitOfWork.Template.GetAll(),
             sections = _unitOfWork.Section.GetAll(),
+            sectionName = _unitOfWork.Section.GetFirstOrDefault(x=> x.SectionId == sectionId).SectionName,
             questions = _unitOfWork.Question.GetAll().Where(u=> u.FKSectionId == sectionId)
 
         };
