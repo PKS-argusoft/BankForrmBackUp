@@ -18,4 +18,5 @@ public class ApplicationDbContext:IdentityDbContext
     public DbSet<QuestionType> QuestionTypes { get; set; }
     public DbSet<QuestionOption> QuestionOptions { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<Answer> Answers { get; set; }
 }

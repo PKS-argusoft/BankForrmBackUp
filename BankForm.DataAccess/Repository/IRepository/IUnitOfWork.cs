@@ -13,6 +13,8 @@ public interface IUnitOfWork
     IQuestionRepository Question { get; }
     IQuestionTypeRepository QuestionType { get; }
     IQuestionOptionRepository QuestionOption { get; }
+    IAnswerRepository Answer { get; }
+    IApplicationUserRepository ApplicationUser { get; }
     void Save();
 
 

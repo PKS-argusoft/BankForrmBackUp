@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Customer\Views\Home\_Sidebar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="linq2db" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />

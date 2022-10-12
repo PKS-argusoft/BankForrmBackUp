@@ -19,14 +19,20 @@ public class UnitOfWork : IUnitOfWork
         Question = new QuestionRepository(_db);
         QuestionType = new QuestionTypeRepository(_db);
         QuestionOption = new QuestionOptionRepository(_db);
+        Answer = new AnswerRepository(_db);
+        ApplicationUser = new ApplicationUserRepository(_db);
+
+
     }
     public ITemplateRepository Template { get; private set; } 
     public IQuestionTypeRepository QuestionType { get; private set; }
     public IQuestionRepository Question { get; private set; }
     public ISectionRepository Section { get; private set; }
     public IQuestionOptionRepository QuestionOption { get; private set; }
+    public IAnswerRepository Answer { get; private set; }
+    public IApplicationUserRepository ApplicationUser { get; private set;}
 
-  
+
 
     public void Save()
     {
