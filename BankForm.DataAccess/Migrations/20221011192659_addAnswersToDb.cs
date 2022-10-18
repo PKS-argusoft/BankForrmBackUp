@@ -51,7 +51,7 @@ namespace BankForm.DataAccess.Migrations
                 {
                     AnswerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AnswerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnswerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),

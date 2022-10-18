@@ -16,6 +16,7 @@ public class QuestionType
     [Required]
     public string QuestionTypes { get; set; }
     public int Order { get; set; }
+
     public DateTime CreatedAt { get; set; }
     public int CreatedBy { get; set; } = -1;
     public DateTime UpdatedAt { get; set; }

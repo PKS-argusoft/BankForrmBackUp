@@ -14,7 +14,7 @@ public class Answer
 {
     [Key]
     public int AnswerId { get; set; }
-    public string AnswerName { get; set; }
+    public string? AnswerName { get; set; }
 
     public DateTime CreatedAt { get; set; }
     public int CreatedBy { get; set; } = -1;

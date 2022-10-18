@@ -3,9 +3,13 @@ using BankForm.Models;
 using Microsoft.AspNetCore.Mvc;
 using BankForm.Models.ViewModels;
 using System.Collections.Generic;
+using BankForm.Utility;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BankFormWeb.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class QuestionOptionController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -61,7 +65,7 @@ public class QuestionOptionController : Controller
 
     //Post
     [HttpPost]
-    [ValidateAntiforgeryToken]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(QuestionOption obj)
     {
         //Get the highest order value and set the current by adding 1 into it

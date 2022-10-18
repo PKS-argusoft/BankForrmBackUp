@@ -3,9 +3,13 @@ using BankForm.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using BankForm.DataAccess.Repository.IRepository;
 using BankForm.Models.ViewModels;
+using BankForm.Utility;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BankFormWeb.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class TemplateController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

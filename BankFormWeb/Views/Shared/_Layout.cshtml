@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BankForm.Utility
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -41,12 +42,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Template" asp-action="Index">Template</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="QuestionType" asp-action="Index">QuestionType</a>
-                        </li>
+                        @if (User.IsInRole(SD.Role_Admin))
+                        { 
+                        
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Template" asp-action="Index">Template</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="QuestionType" asp-action="Index">QuestionType</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Create User</a>
+                            </li>
+                        }
                        
                     </ul>
                     <partial name="_LoginPartial" />

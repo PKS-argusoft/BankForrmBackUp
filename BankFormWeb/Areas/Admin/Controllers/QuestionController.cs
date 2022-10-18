@@ -1,12 +1,15 @@
 ﻿using BankForm.DataAccess.Repository.IRepository;
 using BankForm.Models;
 using BankForm.Models.ViewModels;
+using BankForm.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace BankFormWeb.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class QuestionController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

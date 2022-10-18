@@ -11,7 +11,7 @@
             <ul class="nav sidebar-nav">
                 <div class="sidebar-header">
                     <div class="sidebar-brand">
-                        <a href="#">Brand</a>
+                        <a href="#">Templates</a>
                     </div>
                 </div>
 
@@ -51,18 +51,27 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                            <h1>@Model.sectionName</h1>
-                        <form>
+                            <h1>@Model.section.SectionName</h1>
+                        <form asp-action="IndexPost" asp-route-answer="@Model.answers" id="mainform" method="POST">
                             @foreach (var obj in Model.questions)
                             {
                                 <p>
-                                  <label>@obj.QuestionName : <br> <input type="text" style="width:100%;" /></label>
+                                                  <label>@obj.QuestionName : </label>
+                                                    @foreach(var ans in Model.answers)
+                                                    {
+                                                        @if(ans.QuestionId == obj.QuestionId)
+                                                        {
+                                                                        <input asp-for="@ans.AnswerName" class="form-control">
+                                                        }
+                                                    }
+                                                      
+                                                      
                                 </p>
                                     
                             }
 
                             <p>
-                               <button type="submit">Submit</button>
+                               <button  type="submit">Submit</button>
                             </p>
 
 
